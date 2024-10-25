@@ -11,9 +11,10 @@
   margin: 0 auto;
   position: relative;
   background-color: #111827;
-  overflow: visible;
+  z-index: 0;
 }
 
+/* Card Styles */
 .card {
   width: 64px;
   height: 96px;
@@ -39,6 +40,16 @@
 
 .card.played {
   border-color: #34d399;
+}
+
+.card.not-playable {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.card.not-playable:hover {
+  transform: none;
+  border-color: #e5e7eb;
 }
 
 .card.card-back {
@@ -71,10 +82,12 @@
   color: #1f2937;
 }
 
+/* Card Group Styles */
 .card-group {
   position: absolute;
   width: 64px;
   height: 160px;
+  z-index: 1;
 }
 
 .card-group.spread {
@@ -83,6 +96,7 @@
   justify-content: center;
   width: auto;
   height: auto;
+  z-index: 1;
 }
 
 .card-group-top {
@@ -109,52 +123,108 @@
   transform: translateY(-50%);
 }
 
+/* Played Cards and Direction Indicator Styles */
 .played-card {
   position: absolute;
-  opacity: 0;
-  transform: scale(0.5);
   transition: all 0.5s ease;
+  opacity: 0;
 }
 
 .played-card.show {
   opacity: 1;
-  transform: scale(1);
 }
 
-.played-card-top {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -120%);
-}
-
-.played-card-right {
-  top: 50%;
-  right: 50%;
-  transform: translate(120%, -50%);
-}
-
-.played-card-bottom {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, 20%);
-}
-
-.played-card-left {
-  top: 50%;
-  left: 50%;
-  transform: translate(-120%, -50%);
-}
-
-.winner-display {
+.direction-indicator {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   background-color: rgba(0, 0, 0, 0.75);
   color: white;
-  padding: 16px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, 4px);
+  z-index: 6;
+}
+
+.played-card.trick-top {
+  top: 40%;
+  left: 38%;
+  transform: translate(-50%, -50%) rotate(-8deg);
+  z-index: 2;
+}
+
+.played-card.trick-right {
+  top: 42%;
+  left: 44%;
+  transform: translate(-50%, -50%) rotate(-4deg);
+  z-index: 3;
+}
+
+.played-card.trick-bottom {
+  top: 44%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(0deg);
+  z-index: 4;
+}
+
+.played-card.trick-left {
+  top: 46%;
+  left: 56%;
+  transform: translate(-50%, -50%) rotate(4deg);
+  z-index: 5;
+}
+
+/* Trump Display Styles */
+.trump-display {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.trump-card-container {
+  transform: scale(0.75);
+  position: relative;
+}
+
+.trump-card-container .card {
+  position: relative !important;
+  margin: 0;
+  transform: rotate(-10deg);
+}
+
+.trump-label {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.75);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  margin-top: 4px;
+  text-align: center;
+}
+
+/* UI Element Styles */
+.winner-display {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 8px 16px;
   border-radius: 8px;
   transition: all 0.5s ease;
+  z-index: 10;
+  animation: slideIn 0.3s ease-out;
 }
 
 .new-round-button {
@@ -168,6 +238,7 @@
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  z-index: 10;
 }
 
 .new-round-button:hover {
@@ -183,14 +254,32 @@
   background-color: rgba(0, 0, 0, 0.5);
   padding: 4px 12px;
   border-radius: 9999px;
+  z-index: 10;
 }
 
-.card.not-playable {
-  opacity: 0.5;
-  cursor: not-allowed;
+/* Animations */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
-.card.not-playable:hover {
-  transform: none;
-  border-color: #e5e7eb;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.trump-display {
+  animation: fadeIn 0.3s ease-out;
 }

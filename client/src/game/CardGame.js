@@ -24,7 +24,7 @@ const Card = ({
   };
 
   const cardStyles = spread ? {
-    position: 'relative',
+    position: 'relative',  // Changed from absolute for spread cards
     transform: 'none'
   } : {
     position: 'absolute',
@@ -65,10 +65,31 @@ const Card = ({
 };
 
 const PlayedCard = ({ card, position, show }) => {
-  const className = `played-card played-card-${position} ${show ? 'show' : ''}`;
+  const directionLabels = {
+    top: 'N',
+    right: 'E',
+    bottom: 'S',
+    left: 'W'
+  };
+
+  const className = `played-card trick-${position} ${show ? 'show' : ''}`;
   return (
     <div className={className}>
+      <div className="direction-indicator">{directionLabels[position]}</div>
       <Card card={card} faceUp={true} />
+    </div>
+  );
+};
+
+const TrumpDisplay = ({ card }) => {
+  if (!card) return null;
+  
+  return (
+    <div className="trump-display">
+      <div className="trump-card-container">
+        <Card card={card} faceUp={true} />
+      </div>
+      <div className="trump-label">Trump Suit</div>
     </div>
   );
 };
@@ -127,6 +148,7 @@ const CardGame = () => {
   const [roundComplete, setRoundComplete] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [leadSuit, setLeadSuit] = useState(null);
+  const [trumpCard, setTrumpCard] = useState(null);
 
   const dealCards = () => {
     const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
@@ -136,12 +158,19 @@ const CardGame = () => {
       suits.map(suit => ({ rank, suit }))
     ).sort(() => Math.random() - 0.5);
     
-    setHands({
+    // Deal 4 cards to each player
+    const dealtHands = {
       top: deck.slice(0, 4),
       right: deck.slice(4, 8),
       bottom: deck.slice(8, 12),
       left: deck.slice(12, 16)
-    });
+    };
+
+    // If there are cards remaining after dealing, use next card as trump
+    const trumpCard = deck.length > 16 ? deck[16] : null;
+    
+    setHands(dealtHands);
+    setTrumpCard(trumpCard);
     setPlayedCards({});
     setVisibleCards({});
     setWinner(null);
@@ -170,24 +199,37 @@ const CardGame = () => {
 
   const determineWinner = (playedCards, leadSuit) => {
     const players = Object.keys(playedCards);
+    const trumpSuit = trumpCard ? trumpCard.suit : null;
+
     return players.reduce((winner, player) => {
       if (!winner) return player;
       
       const currentCard = playedCards[player];
       const winningCard = playedCards[winner];
       
-      // If current card follows suit
-      if (currentCard.suit === leadSuit) {
-        // If winning card doesn't follow suit, current card wins
-        if (winningCard.suit !== leadSuit) return player;
-        // If both follow suit, higher rank wins
+      // If current card is trump and winning card isn't
+      if (currentCard.suit === trumpSuit && winningCard.suit !== trumpSuit) {
+        return player;
+      }
+      
+      // If winning card is trump and current card isn't
+      if (winningCard.suit === trumpSuit && currentCard.suit !== trumpSuit) {
+        return winner;
+      }
+      
+      // If both cards are trump
+      if (currentCard.suit === trumpSuit && winningCard.suit === trumpSuit) {
         return getRankValue(currentCard.rank) > getRankValue(winningCard.rank) ? player : winner;
       }
       
-      // If current card doesn't follow suit but winning card does, winning card stays winner
+      // If neither card is trump, follow normal lead suit rules
+      if (currentCard.suit === leadSuit) {
+        if (winningCard.suit !== leadSuit) return player;
+        return getRankValue(currentCard.rank) > getRankValue(winningCard.rank) ? player : winner;
+      }
+      
       if (winningCard.suit === leadSuit) return winner;
       
-      // If neither follows suit, higher rank wins
       return getRankValue(currentCard.rank) > getRankValue(winningCard.rank) ? player : winner;
     }, null);
   };
@@ -260,6 +302,8 @@ const CardGame = () => {
   return (
     <div className="game-container">
       <div className="game-board">
+        <TrumpDisplay card={trumpCard} />
+        
         {Object.entries(playedCards).map(([position, card]) => (
           <PlayedCard 
             key={position} 
@@ -282,7 +326,7 @@ const CardGame = () => {
 
         {winner && (
           <div className="winner-display">
-            {winner === 'bottom' ? 'You win!' : `${winner} player wins!`}
+            {winner === 'bottom' ? '🏆 You win!' : `🎮 ${winner} player wins!`}
           </div>
         )}
 
@@ -295,12 +339,6 @@ const CardGame = () => {
         {isAnimating && (
           <div className="loading-indicator">
             Playing...
-          </div>
-        )}
-
-        {leadSuit && (
-          <div className="lead-suit-indicator">
-            Lead Suit: {leadSuit}
           </div>
         )}
       </div>
