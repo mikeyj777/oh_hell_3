@@ -1,0 +1,196 @@
+.game-container {
+  width: 100%;
+  height: 100vh;
+  background-color: #1f2937;
+  position: relative;
+}
+
+.game-board {
+  max-width: 1000px;
+  height: 600px;
+  margin: 0 auto;
+  position: relative;
+  background-color: #111827;
+  overflow: visible;
+}
+
+.card {
+  width: 64px;
+  height: 96px;
+  background-color: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 8px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.card.clickable {
+  cursor: pointer;
+}
+
+.card.clickable:hover {
+  border-color: #60a5fa;
+  transform: translateY(-8px);
+}
+
+.card.played {
+  border-color: #34d399;
+}
+
+.card.card-back {
+  background-color: #7c3aed;
+  border-color: white;
+}
+
+.card-back-inner {
+  width: 48px;
+  height: 80px;
+  border: 2px solid #9f67ff;
+  border-radius: 4px;
+  margin: auto;
+}
+
+.card-rank {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.card-suit {
+  font-size: 24px;
+}
+
+.red {
+  color: #dc2626;
+}
+
+.black {
+  color: #1f2937;
+}
+
+.card-group {
+  position: absolute;
+  width: 64px;
+  height: 160px;
+}
+
+.card-group.spread {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  width: auto;
+  height: auto;
+}
+
+.card-group-top {
+  top: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.card-group-right {
+  right: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.card-group-bottom {
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.card-group-left {
+  left: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.played-card {
+  position: absolute;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.5s ease;
+}
+
+.played-card.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.played-card-top {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -120%);
+}
+
+.played-card-right {
+  top: 50%;
+  right: 50%;
+  transform: translate(120%, -50%);
+}
+
+.played-card-bottom {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 20%);
+}
+
+.played-card-left {
+  top: 50%;
+  left: 50%;
+  transform: translate(-120%, -50%);
+}
+
+.winner-display {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 16px;
+  border-radius: 8px;
+  transition: all 0.5s ease;
+}
+
+.new-round-button {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  background-color: #3b82f6;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.new-round-button:hover {
+  background-color: #2563eb;
+}
+
+.loading-indicator {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  color: white;
+  font-size: 14px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 4px 12px;
+  border-radius: 9999px;
+}
+
+.card.not-playable {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.card.not-playable:hover {
+  transform: none;
+  border-color: #e5e7eb;
+}
