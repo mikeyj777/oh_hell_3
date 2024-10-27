@@ -3,7 +3,6 @@ import { getSuit, getRank } from './Cards';
 import './CardGameAndPlacement.css';
 
 const CardPlacement = ({ cards }) => {
-  // Get hands directly from cards instance
   const hands = cards.getHands();
   const numPlayers = hands.length;
 
@@ -38,21 +37,27 @@ const CardPlacement = ({ cards }) => {
     }
   };
 
+  // Component for card corners
+  const CardCorners = ({ rank, suit, color }) => (
+    <>
+      <div className={`card-corner top-left ${color}`}>
+        <div className="card-rank">{rank}</div>
+        <div className="card-suit">{suit}</div>
+      </div>
+      <div className={`card-corner bottom-right ${color}`}>
+        <div className="card-rank">{rank}</div>
+        <div className="card-suit">{suit}</div>
+      </div>
+    </>
+  );
+
   return (
     <div className="card-groups-container">
-      {/* Display trump card in play area */}
+      {/* Play area with trump card */}
       <div className="play-area">
         {cards.getTrump() !== null && (
           <div className="card trump-card">
-            {(() => {
-              const { suit, rank, color } = getCardDisplay(cards.getTrump());
-              return (
-                <>
-                  <span className={`card-rank ${color}`}>{rank}</span>
-                  <span className={`card-suit ${color}`}>{suit}</span>
-                </>
-              );
-            })()}
+            <CardCorners {...getCardDisplay(cards.getTrump())} />
           </div>
         )}
       </div>
@@ -66,14 +71,13 @@ const CardPlacement = ({ cards }) => {
             className={`card-group card-group-position-${positions[playerIndex]}`}
           >
             {hand.map((card, cardIndex) => {
-              const { suit, rank, color } = getCardDisplay(card);
+              const displayInfo = getCardDisplay(card);
               return (
                 <div 
                   key={`card-${playerIndex}-${cardIndex}`}
                   className="card"
                 >
-                  <span className={`card-rank ${color}`}>{rank}</span>
-                  <span className={`card-suit ${color}`}>{suit}</span>
+                  <CardCorners {...displayInfo} />
                 </div>
               );
             })}

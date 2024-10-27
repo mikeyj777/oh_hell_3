@@ -1,7 +1,7 @@
 import React from 'react';
 import './GameBackground.css';
 
-const GameBackground = ({ children }) => {
+const GameBackground = () => {
   return (
     <div className="game-container">
       {/* Decorative pattern overlay */}
@@ -13,11 +13,6 @@ const GameBackground = ({ children }) => {
       <header className="game-header">
         <h1>Oh Hell Card Game</h1>
       </header>
-      
-      {/* Content area */}
-      <div className="game-content">
-        {children}
-      </div>
     </div>
   );
 };

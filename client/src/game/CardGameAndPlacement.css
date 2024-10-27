@@ -1,4 +1,3 @@
-/* Main container styles */
 .card-game-container {
   position: relative;
   width: 100%;
@@ -12,8 +11,16 @@
   left: 0;
   width: 100%;
   height: 100%;
-  padding-top: 120px;
   z-index: 1;
+}
+
+/* Card Groups Container */
+.card-groups-container {
+  position: relative;
+  width: 50%;
+  height: 50%;
+  padding: 100px 100px 100px 100px;
+  min-height: 500px;
 }
 
 /* Card styles */
@@ -26,10 +33,29 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 8px;
+  padding: 4px;
   position: relative;
   transition: all 0.3s ease;
   z-index: 2;
+}
+
+.card-corner {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20px;
+}
+
+.card-corner.top-left {
+  top: 4px;
+  left: 4px;
+}
+
+.card-corner.bottom-right {
+  bottom: 4px;
+  right: 4px;
+  transform: rotate(180deg);
 }
 
 .card.clickable {
@@ -71,10 +97,11 @@
 .card-rank {
   font-size: 14px;
   font-weight: bold;
+  line-height: 1;
 }
 
 .card-suit {
-  font-size: 24px;
+  font-size: 14px;
   line-height: 1;
 }
 
@@ -92,8 +119,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 200px;
-  height: 200px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.1);
   display: flex;
@@ -103,13 +130,6 @@
 }
 
 /* Card groups and placement styles */
-.card-groups-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: 600px;
-}
-
 .card-group {
   position: absolute;
   display: flex;
@@ -124,25 +144,25 @@
 
 /* Player positions */
 .card-group-position-0 { /* Bottom */
-  bottom: 32px;
+  bottom: 100px;
   left: 50%;
   transform: translateX(-50%);
 }
 
 .card-group-position-1 { /* Right */
-  right: 32px;
+  right: 100px;
   top: 50%;
   transform: translateY(-50%) rotate(-90deg);
 }
 
 .card-group-position-2 { /* Top */
-  top: 32px;
+  top: 100px;
   left: 50%;
   transform: translateX(-50%) rotate(180deg);
 }
 
 .card-group-position-3 { /* Left */
-  left: 32px;
+  left: 100px;
   top: 50%;
   transform: translateY(-50%) rotate(90deg);
 }
@@ -150,19 +170,19 @@
 /* Additional positions for 5-7 players */
 .card-group-position-4 { /* Top-right */
   top: 25%;
-  right: 32px;
+  right: 100px;
   transform: rotate(-45deg);
 }
 
 .card-group-position-5 { /* Top-left */
   top: 25%;
-  left: 32px;
+  left: 100px;
   transform: rotate(45deg);
 }
 
 .card-group-position-6 { /* Bottom-right */
   bottom: 25%;
-  right: 32px;
+  right: 100px;
   transform: rotate(-135deg);
 }
 
@@ -173,43 +193,23 @@
 
 /* Media queries for responsiveness */
 @media (max-width: 768px) {
+  .card-groups-container {
+    padding: 80px 80px 80px 80px;
+  }
+
   .card {
     width: 48px;
     height: 72px;
     padding: 4px;
   }
 
-  .card-rank {
+  .card-corner {
+    width: 16px;
+  }
+
+  .card-rank,
+  .card-suit {
     font-size: 12px;
-  }
-
-  .card-suit {
-    font-size: 18px;
-  }
-
-  .play-area {
-    width: 150px;
-    height: 150px;
-  }
-
-  .card-group {
-    gap: 8px;
-  }
-}
-
-@media (max-width: 480px) {
-  .card {
-    width: 40px;
-    height: 60px;
-    padding: 3px;
-  }
-
-  .card-rank {
-    font-size: 10px;
-  }
-
-  .card-suit {
-    font-size: 14px;
   }
 
   .play-area {
@@ -218,6 +218,52 @@
   }
 
   .card-group {
+    gap: 8px;
+  }
+
+  .card-group-position-0 { bottom: 80px; }
+  .card-group-position-1 { right: 80px; }
+  .card-group-position-2 { top: 80px; }
+  .card-group-position-3 { left: 80px; }
+  .card-group-position-4 { right: 80px; }
+  .card-group-position-5 { left: 80px; }
+  .card-group-position-6 { right: 80px; }
+}
+
+@media (max-width: 480px) {
+  .card-groups-container {
+    padding: 60px 60px 60px 60px;
+  }
+
+  .card {
+    width: 40px;
+    height: 60px;
+    padding: 3px;
+  }
+
+  .card-corner {
+    width: 14px;
+  }
+
+  .card-rank,
+  .card-suit {
+    font-size: 10px;
+  }
+
+  .play-area {
+    width: 80px;
+    height: 80px;
+  }
+
+  .card-group {
     gap: 4px;
   }
+
+  .card-group-position-0 { bottom: 60px; }
+  .card-group-position-1 { right: 60px; }
+  .card-group-position-2 { top: 60px; }
+  .card-group-position-3 { left: 60px; }
+  .card-group-position-4 { right: 60px; }
+  .card-group-position-5 { left: 60px; }
+  .card-group-position-6 { right: 60px; }
 }
