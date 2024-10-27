@@ -11,7 +11,9 @@ const CardGame = () => {
     <div className="card-game-container">
       <GameBackground />
       <div className="game-content">
-        <CardPlacement cards={dealCards.cards} />
+        <div className="game-board">
+          <CardPlacement cards={dealCards.cards} />
+        </div>
       </div>
     </div>
   );

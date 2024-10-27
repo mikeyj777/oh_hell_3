@@ -1,3 +1,4 @@
+/* Container styles */
 .card-game-container {
   position: relative;
   width: 100%;
@@ -7,20 +8,26 @@
 
 .game-content {
   position: absolute;
-  top: 0;
+  top: 120px;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: calc(100vh - 120px);
   z-index: 1;
+}
+
+.game-board {
+  max-width: 1200px;
+  height: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 0;
 }
 
 /* Card Groups Container */
 .card-groups-container {
   position: relative;
-  width: 50%;
-  height: 50%;
-  padding: 100px 100px 100px 100px;
-  min-height: 500px;
+  width: 100%;
+  height: 100%;
 }
 
 /* Card styles */
@@ -119,8 +126,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.1);
   display: flex;
@@ -133,7 +140,7 @@
 .card-group {
   position: absolute;
   display: flex;
-  gap: 16px;
+  gap: 24px;
   justify-content: center;
   align-items: center;
   width: auto;
@@ -144,25 +151,25 @@
 
 /* Player positions */
 .card-group-position-0 { /* Bottom */
-  bottom: 100px;
+  bottom: 48px;
   left: 50%;
   transform: translateX(-50%);
 }
 
 .card-group-position-1 { /* Right */
-  right: 100px;
+  right: 48px;
   top: 50%;
   transform: translateY(-50%) rotate(-90deg);
 }
 
 .card-group-position-2 { /* Top */
-  top: 100px;
+  top: 48px;
   left: 50%;
   transform: translateX(-50%) rotate(180deg);
 }
 
 .card-group-position-3 { /* Left */
-  left: 100px;
+  left: 48px;
   top: 50%;
   transform: translateY(-50%) rotate(90deg);
 }
@@ -170,19 +177,19 @@
 /* Additional positions for 5-7 players */
 .card-group-position-4 { /* Top-right */
   top: 25%;
-  right: 100px;
+  right: 48px;
   transform: rotate(-45deg);
 }
 
 .card-group-position-5 { /* Top-left */
   top: 25%;
-  left: 100px;
+  left: 48px;
   transform: rotate(45deg);
 }
 
 .card-group-position-6 { /* Bottom-right */
   bottom: 25%;
-  right: 100px;
+  right: 48px;
   transform: rotate(-135deg);
 }
 
@@ -193,8 +200,9 @@
 
 /* Media queries for responsiveness */
 @media (max-width: 768px) {
-  .card-groups-container {
-    padding: 80px 80px 80px 80px;
+  .game-board {
+    max-width: 100%;
+    height: 600px;
   }
 
   .card {
@@ -213,26 +221,26 @@
   }
 
   .play-area {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
   }
 
   .card-group {
-    gap: 8px;
+    gap: 12px;
   }
 
-  .card-group-position-0 { bottom: 80px; }
-  .card-group-position-1 { right: 80px; }
-  .card-group-position-2 { top: 80px; }
-  .card-group-position-3 { left: 80px; }
-  .card-group-position-4 { right: 80px; }
-  .card-group-position-5 { left: 80px; }
-  .card-group-position-6 { right: 80px; }
+  .card-group-position-0 { bottom: 32px; }
+  .card-group-position-1 { right: 32px; }
+  .card-group-position-2 { top: 32px; }
+  .card-group-position-3 { left: 32px; }
+  .card-group-position-4 { right: 32px; }
+  .card-group-position-5 { left: 32px; }
+  .card-group-position-6 { right: 32px; }
 }
 
 @media (max-width: 480px) {
-  .card-groups-container {
-    padding: 60px 60px 60px 60px;
+  .game-board {
+    height: 500px;
   }
 
   .card {
@@ -251,19 +259,19 @@
   }
 
   .play-area {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
   }
 
   .card-group {
-    gap: 4px;
+    gap: 8px;
   }
 
-  .card-group-position-0 { bottom: 60px; }
-  .card-group-position-1 { right: 60px; }
-  .card-group-position-2 { top: 60px; }
-  .card-group-position-3 { left: 60px; }
-  .card-group-position-4 { right: 60px; }
-  .card-group-position-5 { left: 60px; }
-  .card-group-position-6 { right: 60px; }
+  .card-group-position-0 { bottom: 24px; }
+  .card-group-position-1 { right: 24px; }
+  .card-group-position-2 { top: 24px; }
+  .card-group-position-3 { left: 24px; }
+  .card-group-position-4 { right: 24px; }
+  .card-group-position-5 { left: 24px; }
+  .card-group-position-6 { right: 24px; }
 }
