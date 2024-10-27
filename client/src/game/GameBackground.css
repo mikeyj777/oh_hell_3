@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');  /* Imports an edgy, horror-style font from Google Fonts */
+
+.game-container {
+  position: relative;      /* Establishes this element as a positioning context for its absolute-positioned children */
+  min-height: 100vh;      /* Makes the container at least as tall as the full viewport height */
+  width: 100%;            /* Makes the container span the full width of its parent element */
+  padding: 2rem;          /* Adds 2rem (32px) of inner spacing on all sides of the container */
+  background: linear-gradient(to bottom, #1e3a8a, #172554);  /* Creates a smooth color transition from lighter to darker blue from top to bottom */
+}
+
+.pattern-overlay {
+  position: absolute;     /* Takes this element out of normal flow and positions it relative to game-container */
+  inset: 0;              /* Shorthand for setting top:0, right:0, bottom:0, left:0, making it fill its container */
+  opacity: 0.1;          /* Makes this element 90% transparent, letting the background show through strongly */
+}
+
+.dot-pattern {
+  height: 100%;          /* Makes this element take up the full height of its parent container */
+  width: 100%;           /* Makes this element take up the full width of its parent container */
+  background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0);  /* Creates small white dots at intersection points in a grid pattern */
+  background-size: 24px 24px;  /* Sets the size of the repeating dot pattern grid to 24 by 24 pixels */
+}
+
+.game-header {
+  position: relative;     /* Establishes this element as a positioning context for any absolute children */
+  margin: 0 auto 2rem;    /* Centers horizontally and adds bottom margin of 2rem (32px) */
+  max-width: 1152px;     /* Prevents this element from growing wider than 1152 pixels */
+  padding: 1.5rem;       /* Adds 1.5rem (24px) of inner spacing on all sides */
+  text-align: center;    /* Centers the text within the header */
+}
+
+.game-header h1 {
+  font-family: 'Creepster', cursive;  /* Applies the edgy Google Font to the header text */
+  font-size: 4rem;       /* Makes the text quite large at 64px */
+  color: #ffffff;        /* Sets the text color to white */
+  text-shadow: 0 0 10px rgba(255,255,255,0.5),  /* Creates a glowing effect with multiple shadows */
+               0 0 20px rgba(37,99,235,0.5),
+               0 0 30px rgba(37,99,235,0.5);
+  margin: 0;             /* Removes default margin from the h1 element */
+  letter-spacing: 2px;   /* Adds slight spacing between letters for better readability */
+}
+
+.game-content {
+  position: relative;     /* Establishes this element as a positioning context for any absolutely positioned children */
+}
