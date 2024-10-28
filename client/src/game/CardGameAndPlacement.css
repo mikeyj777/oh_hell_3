@@ -1,36 +1,20 @@
-/* Container styles */
-.card-game-container {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-}
-
 .game-content {
   position: absolute;
-  top: 120px;
+  top: 400px;  /* Reduced from 120px */
   left: 0;
   width: 100%;
-  height: calc(100vh - 120px);
+  height: calc(100vh - 80px);  /* Need to update this too */
   z-index: 1;
 }
 
-.game-board {
-  max-width: 1200px;
-  height: 800px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 0;
-}
-
-/* Card Groups Container */
+/* Container styles */
 .card-groups-container {
   position: relative;
   width: 100%;
   height: 100%;
 }
 
-/* Card styles */
+/* Card base styles */
 .card {
   width: 64px;
   height: 96px;
@@ -65,42 +49,6 @@
   transform: rotate(180deg);
 }
 
-.card.clickable {
-  cursor: pointer;
-}
-
-.card.clickable:hover {
-  border-color: #60a5fa;
-  transform: translateY(-8px);
-}
-
-.card.played {
-  border-color: #34d399;
-}
-
-.card.not-playable {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.card.not-playable:hover {
-  transform: none;
-  border-color: #e5e7eb;
-}
-
-.card.card-back {
-  background-color: #7c3aed;
-  border-color: white;
-}
-
-.card-back-inner {
-  width: 48px;
-  height: 80px;
-  border: 2px solid #9f67ff;
-  border-radius: 4px;
-  margin: auto;
-}
-
 .card-rank {
   font-size: 14px;
   font-weight: bold;
@@ -112,15 +60,19 @@
   line-height: 1;
 }
 
-.red {
-  color: #dc2626;
+.red { color: #dc2626; }
+.black { color: #1f2937; }
+
+/* Card group base styles */
+.card-group {
+  position: absolute;
+  display: flex;
+  gap: 0;
+  z-index: 1;
+  transition: all 0.3s ease;
 }
 
-.black {
-  color: #1f2937;
-}
-
-/* Play area styles */
+/* Play area */
 .play-area {
   position: absolute;
   top: 50%;
@@ -136,75 +88,92 @@
   z-index: 1;
 }
 
-/* Card groups and placement styles */
-.card-group {
-  position: absolute;
-  display: flex;
-  gap: 24px;
-  justify-content: center;
-  align-items: center;
-  width: auto;
-  height: auto;
-  z-index: 1;
-  transition: all 0.3s ease;
-}
-
-/* Player positions */
-.card-group-position-0 { /* Bottom */
-  bottom: 48px;
+/* Base positions for all layouts */
+.card-group.position-p4-0,
+.card-group.position-p5-0,
+.card-group.position-p6-0,
+.card-group.position-p7-0 {
+  /* Bottom player */
+  bottom: 100px;
   left: 50%;
   transform: translateX(-50%);
+  flex-direction: row;
 }
 
-.card-group-position-1 { /* Right */
-  right: 48px;
+/* Card overlapping */
+/* Horizontal overlap (for bottom and top) */
+[class*="position-"][class*="-0"] .card {
+  margin-right: -40px; /* Wide spread for bottom player */
+}
+
+/* Vertical overlap (for sides) */
+.card-group[style*="column"] .card {
+  margin-bottom: -70px;
+}
+
+/* 4 Player Layout */
+.players-4 .position-p4-1 { /* Left */
+  left: 48px;
   top: 50%;
-  transform: translateY(-50%) rotate(-90deg);
+  transform: translateY(-50%);
+  flex-direction: column;
 }
 
-.card-group-position-2 { /* Top */
-  top: 48px;
+.players-4 .position-p4-1 .card {
+  margin-bottom: -85px;  /* Increase this negative margin to show less of each card */
+}
+
+.players-4 .position-p4-2 { /* Top */
+  top: 200px;
   left: 50%;
-  transform: translateX(-50%) rotate(180deg);
+  transform: translateX(-50%);
+  flex-direction: row;
 }
 
-.card-group-position-3 { /* Left */
-  left: 48px;
+.players-4 .position-p4-3 { /* Right */
+  right: 48px;
   top: 50%;
-  transform: translateY(-50%) rotate(90deg);
+  transform: translateY(-50%);
+  flex-direction: column;
 }
 
-/* Additional positions for 5-7 players */
-.card-group-position-4 { /* Top-right */
-  top: 25%;
-  right: 48px;
-  transform: rotate(-45deg);
+.players-4 .position-p4-3 .card {
+  margin-bottom: -85px;  /* Increase this negative margin to show less of each card */
 }
 
-.card-group-position-5 { /* Top-left */
-  top: 25%;
-  left: 48px;
-  transform: rotate(45deg);
+/* 5 Player Layout */
+.players-5 [class*="position-p5"] {
+  /* Similar to 4 but with 2 top stacks */
 }
 
-.card-group-position-6 { /* Bottom-right */
-  bottom: 25%;
-  right: 48px;
-  transform: rotate(-135deg);
+/* 6 Player Layout */
+.players-6 [class*="position-p6"] {
+  /* 2 left stacks, 1 top, 2 right stacks */
 }
 
-/* Hover effects for card groups */
+/* 7 Player Layout */
+.players-7 [class*="position-p7"] {
+  /* 2 stacks on each side except bottom */
+}
+
+/* Position specific styles for 5-7 players */
+[class*="position-p5"],
+[class*="position-p6"],
+[class*="position-p7"] {
+  /* Stack positioning for different layouts */
+}
+
+/* Hover effects */
 .card-group:hover {
   z-index: 3;
 }
 
-/* Media queries for responsiveness */
-@media (max-width: 768px) {
-  .game-board {
-    max-width: 100%;
-    height: 600px;
-  }
+.card:hover {
+  z-index: 4;
+}
 
+/* Media queries */
+@media (max-width: 768px) {
   .card {
     width: 48px;
     height: 72px;
@@ -220,29 +189,16 @@
     font-size: 12px;
   }
 
-  .play-area {
-    width: 80px;
-    height: 80px;
+  [class*="position-"][class*="-0"] .card {
+    margin-right: -30px;
   }
 
-  .card-group {
-    gap: 12px;
+  .card-group[style*="column"] .card {
+    margin-bottom: -50px;
   }
-
-  .card-group-position-0 { bottom: 32px; }
-  .card-group-position-1 { right: 32px; }
-  .card-group-position-2 { top: 32px; }
-  .card-group-position-3 { left: 32px; }
-  .card-group-position-4 { right: 32px; }
-  .card-group-position-5 { left: 32px; }
-  .card-group-position-6 { right: 32px; }
 }
 
 @media (max-width: 480px) {
-  .game-board {
-    height: 500px;
-  }
-
   .card {
     width: 40px;
     height: 60px;
@@ -258,20 +214,11 @@
     font-size: 10px;
   }
 
-  .play-area {
-    width: 60px;
-    height: 60px;
+  [class*="position-"][class*="-0"] .card {
+    margin-right: -25px;
   }
 
-  .card-group {
-    gap: 8px;
+  .card-group[style*="column"] .card {
+    margin-bottom: -40px;
   }
-
-  .card-group-position-0 { bottom: 24px; }
-  .card-group-position-1 { right: 24px; }
-  .card-group-position-2 { top: 24px; }
-  .card-group-position-3 { left: 24px; }
-  .card-group-position-4 { right: 24px; }
-  .card-group-position-5 { left: 24px; }
-  .card-group-position-6 { right: 24px; }
 }
