@@ -2,6 +2,7 @@ import React from 'react';
 import GameBackground from './GameBackground';
 import DealCards from './DealCards';
 import CardPlacement from './CardPlacement';
+// import CardPlacementTest from './CardPlacementTest';
 import './CardGameAndPlacement.css';
 
 const CardGame = () => {
@@ -12,6 +13,7 @@ const CardGame = () => {
       <GameBackground />
       <div className="game-content">
         <div className="game-board">
+          {/* <CardPlacementTest cards={dealCards.cards} /> */}
           <CardPlacement cards={dealCards.cards} />
         </div>
       </div>

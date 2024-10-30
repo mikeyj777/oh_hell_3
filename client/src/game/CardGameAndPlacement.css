@@ -409,3 +409,84 @@
     margin-right: -30px;
   }
 }
+
+/* Play area styles for 4-player card placement */
+.players-4 .played-cards-area {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+/* Base style for played cards in 4-player game */
+.players-4 .played-card {
+  width: 64px;
+  height: 96px;
+  background-color: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease;
+}
+
+/* Position styles for each player's played cards in 4-player game */
+.players-4 .played-card-position-0 {  /* Bottom player */
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.players-4 .played-card-position-1 {  /* Left player */
+  left: 20%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.players-4 .played-card-position-2 {  /* Top player */
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.players-4 .played-card-position-3 {  /* Right player */
+  right: 20%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Stack order for played cards in 4-player game */
+.players-4 .played-card[data-play-order="0"] { z-index: 2; }
+.players-4 .played-card[data-play-order="1"] { z-index: 3; }
+.players-4 .played-card[data-play-order="2"] { z-index: 4; }
+.players-4 .played-card[data-play-order="3"] { z-index: 5; }
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  .players-4 .played-cards-area {
+    width: 200px;
+    height: 200px;
+  }
+
+  .players-4 .played-card {
+    width: 48px;
+    height: 72px;
+  }
+}
+
+@media (max-width: 480px) {
+  .players-4 .played-cards-area {
+    width: 160px;
+    height: 160px;
+  }
+
+  .players-4 .played-card {
+    width: 40px;
+    height: 60px;
+  }
+}
