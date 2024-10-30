@@ -1,9 +1,9 @@
 .game-content {
   position: absolute;
-  top: 400px;  /* Reduced from 120px */
+  top: 600px;  /* This is the space between header and game area */
   left: 0;
   width: 100%;
-  height: calc(100vh - 80px);  /* Need to update this too */
+  height: calc(100vh - 120px);
   z-index: 1;
 }
 
@@ -14,7 +14,7 @@
   height: 100%;
 }
 
-/* Card base styles */
+/* Card styles */
 .card {
   width: 64px;
   height: 96px;
@@ -63,15 +63,6 @@
 .red { color: #dc2626; }
 .black { color: #1f2937; }
 
-/* Card group base styles */
-.card-group {
-  position: absolute;
-  display: flex;
-  gap: 0;
-  z-index: 1;
-  transition: all 0.3s ease;
-}
-
 /* Play area */
 .play-area {
   position: absolute;
@@ -88,30 +79,23 @@
   z-index: 1;
 }
 
-/* Base positions for all layouts */
-.card-group.position-p4-0,
-.card-group.position-p5-0,
-.card-group.position-p6-0,
-.card-group.position-p7-0 {
-  /* Bottom player */
-  bottom: 100px;
+/* Base card group styles */
+.card-group {
+  position: absolute;
+  display: flex;
+  gap: 0;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+/* 4 Player Layout */
+.players-4 .position-p4-0 { /* Bottom */
+  bottom: 80px;
   left: 50%;
   transform: translateX(-50%);
   flex-direction: row;
 }
 
-/* Card overlapping */
-/* Horizontal overlap (for bottom and top) */
-[class*="position-"][class*="-0"] .card {
-  margin-right: -40px; /* Wide spread for bottom player */
-}
-
-/* Vertical overlap (for sides) */
-.card-group[style*="column"] .card {
-  margin-bottom: -70px;
-}
-
-/* 4 Player Layout */
 .players-4 .position-p4-1 { /* Left */
   left: 48px;
   top: 50%;
@@ -119,12 +103,8 @@
   flex-direction: column;
 }
 
-.players-4 .position-p4-1 .card {
-  margin-bottom: -85px;  /* Increase this negative margin to show less of each card */
-}
-
 .players-4 .position-p4-2 { /* Top */
-  top: 200px;
+  top: 80px;
   left: 50%;
   transform: translateX(-50%);
   flex-direction: row;
@@ -137,30 +117,165 @@
   flex-direction: column;
 }
 
-.players-4 .position-p4-3 .card {
-  margin-bottom: -85px;  /* Increase this negative margin to show less of each card */
+/* 5 Player Layout */
+.players-5 .position-p5-0 { /* Bottom */
+  bottom: 0;
+  left: 40%;
+  transform: translateX(-10%);
+  transform: translateY(200%);
+  flex-direction: row;
 }
 
-/* 5 Player Layout */
-.players-5 [class*="position-p5"] {
-  /* Similar to 4 but with 2 top stacks */
+.players-5 .position-p5-1 { /* Left */
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  flex-direction: column;
+}
+
+.players-5 .position-p5-2 { /* Top-left */
+  top: 0px;
+  left: 30%;
+  transform: translateX(-50%);
+  transform: translateY(-800%);
+  flex-direction: row;
+}
+
+.players-5 .position-p5-3 { /* Top-right */
+  top: 0px;
+  left: 55%;
+  transform: translateX(-100%);
+  transform: translateY(-800%);
+  flex-direction: row;
+}
+
+.players-5 .position-p5-4 { /* Right */
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  flex-direction: column;
 }
 
 /* 6 Player Layout */
-.players-6 [class*="position-p6"] {
-  /* 2 left stacks, 1 top, 2 right stacks */
+.players-6 .position-p6-0 { /* Bottom */
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  flex-direction: row;
+}
+
+.players-6 .position-p6-1,
+.players-6 .position-p6-4 { /* Left stacks */
+  left: 48px;
+  flex-direction: column;
+}
+
+.players-6 .position-p6-1 { /* Left-top */
+  top: 35%;
+  transform: translateY(-50%);
+}
+
+.players-6 .position-p6-4 { /* Left-bottom */
+  top: 65%;
+  transform: translateY(-50%);
+}
+
+.players-6 .position-p6-2 { /* Top */
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  flex-direction: row;
+}
+
+.players-6 .position-p6-3,
+.players-6 .position-p6-5 { /* Right stacks */
+  right: 48px;
+  flex-direction: column;
+}
+
+.players-6 .position-p6-3 { /* Right-top */
+  top: 35%;
+  transform: translateY(-50%);
+}
+
+.players-6 .position-p6-5 { /* Right-bottom */
+  top: 65%;
+  transform: translateY(-50%);
 }
 
 /* 7 Player Layout */
-.players-7 [class*="position-p7"] {
-  /* 2 stacks on each side except bottom */
+.players-7 .position-p7-0 { /* Bottom */
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  flex-direction: row;
 }
 
-/* Position specific styles for 5-7 players */
-[class*="position-p5"],
-[class*="position-p6"],
-[class*="position-p7"] {
-  /* Stack positioning for different layouts */
+.players-7 [class*="position-p7"] { /* Default vertical stack */
+  flex-direction: column;
+}
+
+.players-7 .position-p7-1,
+.players-7 .position-p7-5 { /* Left stacks */
+  left: 48px;
+}
+
+.players-7 .position-p7-1 { /* Left-top */
+  top: 35%;
+  transform: translateY(-50%);
+}
+
+.players-7 .position-p7-5 { /* Left-bottom */
+  top: 65%;
+  transform: translateY(-50%);
+}
+
+.players-7 .position-p7-2,
+.players-7 .position-p7-3 { /* Top stacks */
+  top: 80px;
+  flex-direction: row;
+}
+
+.players-7 .position-p7-2 { /* Top-left */
+  left: 35%;
+  transform: translateX(-50%);
+}
+
+.players-7 .position-p7-3 { /* Top-right */
+  left: 65%;
+  transform: translateX(-50%);
+}
+
+.players-7 .position-p7-4,
+.players-7 .position-p7-6 { /* Right stacks */
+  right: 48px;
+}
+
+.players-7 .position-p7-4 { /* Right-top */
+  top: 35%;
+  transform: translateY(-50%);
+}
+
+.players-7 .position-p7-6 { /* Right-bottom */
+  top: 65%;
+  transform: translateY(-50%);
+}
+
+/* Card overlapping */
+/* Horizontal spread for bottom player */
+[class*="position-p"][class$="-0"] .card {
+  margin-right: -40px;
+}
+
+/* Vertical overlap for all vertical stacks */
+[class*="position-p"]:not([class$="-0"]) .card {
+  margin-bottom: -85px; /* 85% overlap */
+}
+
+/* More compressed horizontal spread for top positions */
+[class*="position-p"][class*="-2"] .card,
+[class*="position-p"][class*="-3"] .card {
+  margin-right: -50px;
 }
 
 /* Hover effects */
@@ -189,12 +304,17 @@
     font-size: 12px;
   }
 
-  [class*="position-"][class*="-0"] .card {
+  [class*="position-p"][class$="-0"] .card {
     margin-right: -30px;
   }
 
-  .card-group[style*="column"] .card {
-    margin-bottom: -50px;
+  [class*="position-p"]:not([class$="-0"]) .card {
+    margin-bottom: -63px; /* Maintain 85% overlap for smaller cards */
+  }
+
+  [class*="position-p"][class*="-2"] .card,
+  [class*="position-p"][class*="-3"] .card {
+    margin-right: -35px;
   }
 }
 
@@ -214,11 +334,16 @@
     font-size: 10px;
   }
 
-  [class*="position-"][class*="-0"] .card {
+  [class*="position-p"][class$="-0"] .card {
     margin-right: -25px;
   }
 
-  .card-group[style*="column"] .card {
-    margin-bottom: -40px;
+  [class*="position-p"]:not([class$="-0"]) .card {
+    margin-bottom: -51px; /* Maintain 85% overlap for smallest cards */
+  }
+
+  [class*="position-p"][class*="-2"] .card,
+  [class*="position-p"][class*="-3"] .card {
+    margin-right: -30px;
   }
 }
