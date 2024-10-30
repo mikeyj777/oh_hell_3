@@ -142,7 +142,7 @@
 
 /* 4 Player Layout */
 .players-4 .position-p4-0 { /* Bottom */
-  bottom: -200px;
+  bottom: -400px;
   left: 50%;
   transform: translateX(-50%);
   flex-direction: row;
@@ -156,7 +156,7 @@
 }
 
 .players-4 .position-p4-2 { /* Top */
-  top: -200px;
+  top: -400px;
   left: 50%;
   transform: translateX(-50%);
   flex-direction: row;
@@ -171,7 +171,7 @@
 
 /* 5 Player Layout */
 .players-5 .position-p5-0 { /* Bottom */
-  bottom: 0;
+  bottom: -150px;
   left: 40%;
   transform: translateX(-10%);
   transform: translateY(200%);
@@ -186,7 +186,7 @@
 }
 
 .players-5 .position-p5-2 { /* Top-left */
-  top: 0px;
+  top: -150px;
   left: 30%;
   transform: translateX(-50%);
   transform: translateY(-800%);
@@ -194,7 +194,7 @@
 }
 
 .players-5 .position-p5-3 { /* Top-right */
-  top: 0px;
+  top: -150px;
   left: 55%;
   transform: translateX(-100%);
   transform: translateY(-800%);
@@ -210,7 +210,7 @@
 
 /* 6 Player Layout */
 .players-6 .position-p6-0 { /* Bottom */
-  bottom: -300px;
+  bottom: -400px;
   left: 50%;
   transform: translateX(-50%);
   flex-direction: row;
@@ -235,7 +235,7 @@
 .players-6 .position-p6-3 { /* Right-top */
   top: 35%;
   transform: translateY(-50%);
-  top: -300px;
+  top: -400px;
   left: 50%;
   transform: translateX(-50%);
 }
