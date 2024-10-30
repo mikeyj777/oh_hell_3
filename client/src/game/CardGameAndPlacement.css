@@ -63,20 +63,72 @@
 .red { color: #dc2626; }
 .black { color: #1f2937; }
 
-/* Play area */
+.trump-display {
+  position: absolute;
+  top: -450px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+.trump-label {
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.trump-card {
+  transform: rotate(-10deg);  /* Slight tilt for visual interest */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Updated play area for discarded cards */
 .play-area {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
+  width: 200px;  /* Increased from 100px */
+  height: 200px; /* Increased from 100px */
+  border-radius: 12px;  /* Changed from 50% to rounded rectangle */
   background: rgba(255, 255, 255, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1;
+}
+
+/* Add responsive handling for trump display */
+@media (max-width: 768px) {
+  .trump-display {
+    top: 10px;
+    left: 10px;
+  }
+
+  .trump-label {
+    font-size: 12px;
+  }
+
+  .play-area {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .trump-display {
+    transform: scale(0.8);
+  }
+
+  .play-area {
+    width: 120px;
+    height: 120px;
+  }
 }
 
 /* Base card group styles */
@@ -158,106 +210,116 @@
 
 /* 6 Player Layout */
 .players-6 .position-p6-0 { /* Bottom */
-  bottom: 80px;
+  bottom: -300px;
   left: 50%;
   transform: translateX(-50%);
   flex-direction: row;
 }
 
 .players-6 .position-p6-1,
-.players-6 .position-p6-4 { /* Left stacks */
+.players-6 .position-p6-2 { /* Left stacks */
   left: 48px;
   flex-direction: column;
 }
 
 .players-6 .position-p6-1 { /* Left-top */
-  top: 35%;
-  transform: translateY(-50%);
-}
-
-.players-6 .position-p6-4 { /* Left-bottom */
-  top: 65%;
+  top: 200px;
   transform: translateY(-50%);
 }
 
 .players-6 .position-p6-2 { /* Top */
-  top: 80px;
-  left: 50%;
-  transform: translateX(-50%);
-  flex-direction: row;
-}
-
-.players-6 .position-p6-3,
-.players-6 .position-p6-5 { /* Right stacks */
-  right: 48px;
-  flex-direction: column;
+  top: -200px;
+  transform: translateY(-50%);
 }
 
 .players-6 .position-p6-3 { /* Right-top */
   top: 35%;
   transform: translateY(-50%);
+  top: -300px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.players-6 .position-p6-4,
+.players-6 .position-p6-5 { /* Right stacks */
+  right: 48px;
+  flex-direction: column;
+}
+
+.players-6 .position-p6-4 { /* Left-bottom */
+  top: -200px;
+  transform: translateY(-50%);
 }
 
 .players-6 .position-p6-5 { /* Right-bottom */
-  top: 65%;
+  top: 200px;
   transform: translateY(-50%);
 }
 
 /* 7 Player Layout */
 .players-7 .position-p7-0 { /* Bottom */
-  bottom: 80px;
+  bottom: -400px;
   left: 50%;
   transform: translateX(-50%);
   flex-direction: row;
 }
 
-.players-7 [class*="position-p7"] { /* Default vertical stack */
+.players-7 .position-p7-1,
+.players-7 .position-p7-2 { /* Left stacks */
+  left: 100px;
   flex-direction: column;
 }
 
-.players-7 .position-p7-1,
-.players-7 .position-p7-5 { /* Left stacks */
-  left: 48px;
-}
-
 .players-7 .position-p7-1 { /* Left-top */
-  top: 35%;
-  transform: translateY(-50%);
-}
-
-.players-7 .position-p7-5 { /* Left-bottom */
-  top: 65%;
-  transform: translateY(-50%);
-}
-
-.players-7 .position-p7-2,
-.players-7 .position-p7-3 { /* Top stacks */
-  top: 80px;
-  flex-direction: row;
+  top: 100px;
+  transform: translateX(-50%);
 }
 
 .players-7 .position-p7-2 { /* Top-left */
-  left: 35%;
+  top: -200px;
+  left:75px;
   transform: translateX(-50%);
 }
 
-.players-7 .position-p7-3 { /* Top-right */
-  left: 65%;
+/* First, group common styles */
+.players-7 .position-p7-3,
+.players-7 .position-p7-4 { /* Top stacks */
+  top: -400px;
+  flex-direction: row;
+}
+
+/* Individual positions with same transform */
+.players-7 .position-p7-3 { 
+  left: 500px;
   transform: translateX(-50%);
 }
 
-.players-7 .position-p7-4,
+.players-7 .position-p7-4 { 
+  right: 500px;
+  transform: translateX(-50%);  /* Changed from translateY to match */
+}
+
+/* Make sure this exists for card overlapping */
+[class*="position-p7"][class*="-3"] .card,
+[class*="position-p7"][class*="-4"] .card {
+  margin-right: -40px;  /* Controls horizontal overlap amount */
+}
+
+.players-7 .position-p7-5,
 .players-7 .position-p7-6 { /* Right stacks */
   right: 48px;
+  flex-direction: column;
 }
 
-.players-7 .position-p7-4 { /* Right-top */
-  top: 35%;
+.players-7 .position-p7-5 { /* Left-bottom */
+  top: -300px;
   transform: translateY(-50%);
 }
 
+
+
 .players-7 .position-p7-6 { /* Right-bottom */
-  top: 65%;
+  bottom: -300px;
   transform: translateY(-50%);
 }
 

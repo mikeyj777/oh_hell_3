@@ -57,19 +57,19 @@ const CardPlacement = ({ cards }) => {
       },
       6: {
         0: 'position-p6-0', // Bottom
-        1: 'position-p6-4', // Left-bottom
-        2: 'position-p6-1', // Left-top
-        3: 'position-p6-2', // Top
-        4: 'position-p6-3', // Right-top
+        1: 'position-p6-1', // Left-bottom
+        2: 'position-p6-2', // Left-top
+        3: 'position-p6-3', // Top
+        4: 'position-p6-4', // Right-top
         5: 'position-p6-5'  // Right-bottom
       },
       7: {
         0: 'position-p7-0', // Bottom
-        1: 'position-p7-5', // Left-bottom
-        2: 'position-p7-1', // Left-top
-        3: 'position-p7-2', // Top-left
-        4: 'position-p7-3', // Top-right
-        5: 'position-p7-4', // Right-top
+        1: 'position-p7-1', // Left-bottom
+        2: 'position-p7-2', // Left-top
+        3: 'position-p7-3', // Top-left
+        4: 'position-p7-4', // Top-right
+        5: 'position-p7-5', // Right-top
         6: 'position-p7-6'  // Right-bottom
       }
     };
@@ -80,12 +80,18 @@ const CardPlacement = ({ cards }) => {
   return (
     <div className={`card-groups-container players-${numPlayers}`}>
       {/* Play area with trump card */}
-      <div className="play-area">
+      {/* Trump card display */}
+      <div className="trump-display">
+        <div className="trump-label">Trump</div>
         {cards.getTrump() !== null && (
           <div className="card trump-card">
             <CardCorners {...getCardDisplay(cards.getTrump())} />
           </div>
         )}
+      </div>
+      
+      <div className="play-area">
+        
       </div>
 
       {/* Player hands */}
