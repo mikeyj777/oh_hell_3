@@ -14,7 +14,8 @@ const CardPlacementTest = ({ cards }) => {
     { value: 0, player: 1 },
     { value: 15, player: 2 },
     { value: 27, player: 3 },
-    { value: 30, player: 0 }
+    { value: 30, player: 4 },
+    { value: 29, player: 0 },
   ].slice(0, numPlayers);
 
   const getCardDisplay = (cardNumber) => {

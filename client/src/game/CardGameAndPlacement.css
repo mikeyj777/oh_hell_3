@@ -411,10 +411,10 @@
 }
 
 /* Play area styles for 4-player card placement */
-.players-4 .played-cards-area {
+.played-cards-area {
   position: absolute;
-  width: 300px;
-  height: 300px;
+  width: 500px;
+  height: 500px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -422,7 +422,7 @@
 }
 
 /* Base style for played cards in 4-player game */
-.players-4 .played-card {
+.played-card {
   width: 64px;
   height: 96px;
   background-color: white;
@@ -486,6 +486,69 @@
   }
 
   .players-4 .played-card {
+    width: 40px;
+    height: 60px;
+  }
+}
+
+/* Position styles for each player's played cards in 5-player game */
+.players-5 .played-card-position-0 { /* Bottom player */
+  bottom: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.players-5 .played-card-position-1 { /* Left player */
+  left: 12.5%;
+  top: 50%;
+  transform: translateY(-50%) translateX(-100%);
+}
+
+.players-5 .played-card-position-2 { /* Top player */
+  top: -24%;
+  left: 25%;
+  transform: translateX(-50%);
+}
+
+.players-5 .played-card-position-3 { /* Right player */
+  top: 0%;
+  right: 25%;
+  transform: translateY(-50%) translateX(100%);
+}
+
+.players-5 .played-card-position-4 { /* Center player */
+  top: 50%;
+  right: -50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Stack order for played cards in 5-player game */
+.players-5 .played-card[data-play-order="0"] { z-index: 2; }
+.players-5 .played-card[data-play-order="1"] { z-index: 3; }
+.players-5 .played-card[data-play-order="2"] { z-index: 4; }
+.players-5 .played-card[data-play-order="3"] { z-index: 5; }
+.players-5 .played-card[data-play-order="4"] { z-index: 6; }
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  .players-5 .played-cards-area {
+    width: 320px;
+    height: 320px;
+  }
+
+  .players-5 .played-card {
+    width: 48px;
+    height: 72px;
+  }
+}
+
+@media (max-width: 480px) {
+  .players-5 .played-cards-area {
+    width: 240px;
+    height: 240px;
+  }
+
+  .players-5 .played-card {
     width: 40px;
     height: 60px;
   }
