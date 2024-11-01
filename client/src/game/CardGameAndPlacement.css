@@ -623,3 +623,80 @@
     height: 60px;
   }
 }
+
+/* Position styles for each player's played cards in 7-player game */
+.players-7 .played-card-position-0 { /* Bottom player */
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.players-7 .played-card-position-1 { /* Left player */
+  left: 8%;
+  bottom: -40%;
+  transform: translateY(-50%) translateX(-100%);
+}
+
+.players-7 .played-card-position-2 { /* Top-left player */
+  top: -10%;
+  left: -8%;
+  transform: translateX(-50%);
+}
+
+.players-7 .played-card-position-3 { /* Top player */
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.players-7 .played-card-position-4 { /* Top-right player */
+  top: 10%;
+  right: 25%;
+  transform: translateX(50%);
+}
+
+.players-7 .played-card-position-5 { /* Right player */
+  right: 8.33%;
+  top: 50%;
+  transform: translateY(-50%) translateX(100%);
+}
+
+.players-7 .played-card-position-6 { /* Center player */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Stack order for played cards in 7-player game */
+.players-7 .played-card[data-play-order="0"] { z-index: 2; }
+.players-7 .played-card[data-play-order="1"] { z-index: 3; }
+.players-7 .played-card[data-play-order="2"] { z-index: 4; }
+.players-7 .played-card[data-play-order="3"] { z-index: 5; }
+.players-7 .played-card[data-play-order="4"] { z-index: 6; }
+.players-7 .played-card[data-play-order="5"] { z-index: 7; }
+.players-7 .played-card[data-play-order="6"] { z-index: 8; }
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  .players-7 .played-cards-area {
+    width: 480px;
+    height: 480px;
+  }
+
+  .players-7 .played-card {
+    width: 48px;
+    height: 72px;
+  }
+}
+
+@media (max-width: 480px) {
+  .players-7 .played-cards-area {
+    width: 360px;
+    height: 360px;
+  }
+
+  .players-7 .played-card {
+    width: 40px;
+    height: 60px;
+  }
+}

@@ -6,7 +6,7 @@ import CardPlacementTest from './CardPlacementTest';
 import './CardGameAndPlacement.css';
 
 const CardGame = () => {
-  const dealCards = new DealCards(6, 8);
+  const dealCards = new DealCards(7, 7);
 
   return (
     <div className="card-game-container">
